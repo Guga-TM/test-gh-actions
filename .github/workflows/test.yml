@@ -7,11 +7,10 @@ on:
     types:
       - opened
       - reopened
-  workflow_dispatch:
-    inputs:
-      manual-trigger:
-        description: 'Manually trigger the workflow'
-        required: true
+  #workflow_dispatch:
+  repository_dispatch:
+    types:
+     - webhook
 
 jobs:
   check:
