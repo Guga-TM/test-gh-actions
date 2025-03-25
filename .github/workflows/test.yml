@@ -5,8 +5,7 @@ name: jenkins-check-unit-tests-completion
 run-name: HAHAHA
 on:
   pull_request:
-    types:
-      - synchronize
+    branches: ['main']
   workflow_dispatch:
 
 jobs:
