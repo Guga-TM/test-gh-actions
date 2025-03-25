@@ -1,0 +1,20 @@
+name: jenkins-check-unit-tests-completion
+
+# The run of this job indicates that unit tests job run
+# in Jenkins was successful
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types:
+      - webhook
+
+jobs:
+  check:
+    name: Check jenkins job completion
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check jenkins job completion
+        run: |
+          #!/bin/bash
+          echo "Unit tests passed"
