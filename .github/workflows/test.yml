@@ -5,8 +5,7 @@ name: jenkins-check-unit-tests-completion-lol
 on:
   pull_request:
     types:
-      - opened
-      - reopened
+      - closed
 
 jobs:
   dummy:
