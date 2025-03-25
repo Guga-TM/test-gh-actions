@@ -8,14 +8,8 @@ on:
       - closed
 
 jobs:
-  dummy:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: namesfdsdf
-        run: echo hello
   check:
     name: Check jenkins job completion lol
-    needs: Get Status Sample Workflow
     runs-on: ubuntu-22.04
     steps:
       - name: Check jenkins job completion
