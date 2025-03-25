@@ -9,6 +9,8 @@ on:
       - reopened
 
 jobs:
+  dummy:
+    runs-on: ubuntu-22.04
   check:
     name: Check jenkins job completion lol
     needs: Get Status Sample Workflow
