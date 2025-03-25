@@ -5,6 +5,9 @@ name: jenkins-check-unit-tests-completion
 
 on:
   pull_request:
+    types:
+      - opened
+      - reopened
 
 jobs:
   check:
