@@ -3,10 +3,10 @@ name: jenkins-check-unit-tests-completion-lol
 # The run of this job indicates that unit tests job run
 # in Jenkins was successful
 on:
-  pull_request:
-    types:
-      - opened
-      - reopened
+  # pull_request:
+  #   types:
+  #     - opened
+  #     - reopened
   #workflow_dispatch:
   repository_dispatch:
     types:
