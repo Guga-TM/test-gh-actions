@@ -2,12 +2,11 @@ name: jenkins-check-unit-tests-completion
 
 # The run of this job indicates that unit tests job run
 # in Jenkins was successful
-
+run-name: HAHAHA
 on:
   pull_request:
-    types:
-      - opened
-      - reopened
+    branches: ['main']
+  workflow_dispatch:
 
 jobs:
   check:
