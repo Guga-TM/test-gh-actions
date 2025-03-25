@@ -9,7 +9,7 @@ on:
 
 jobs:
   check:
-    name: Check jenkins job completion lol
+    name: lol check
     runs-on: ubuntu-22.04
     steps:
       - name: Check jenkins job completion
