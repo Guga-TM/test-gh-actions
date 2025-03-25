@@ -5,6 +5,7 @@ name: jenkins-check-unit-tests-completion
 run-name: HAHAHA
 on:
   workflow_dispatch:
+  merge_group:
 
 jobs:
   check:
