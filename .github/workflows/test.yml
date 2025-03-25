@@ -5,7 +5,13 @@ name: jenkins-check-unit-tests-completion-lol
 on:
   pull_request:
     types:
-      - closed
+      - opened
+      - reopened
+  workflow_dispatch:
+    inputs:
+      manual-trigger:
+        description: 'Manually trigger the workflow'
+        required: true
 
 jobs:
   check:
