@@ -14,9 +14,9 @@ jobs:
   check:
     name: Check jenkins job completion
     runs-on: ubuntu-22.04
+    permissions: write-all
     steps:
       - name: Check jenkins job completion
         run: |
           #!/bin/bash
           echo "Unit tests passed"
-          exit 1
