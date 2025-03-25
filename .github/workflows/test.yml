@@ -4,8 +4,6 @@ name: jenkins-check-unit-tests-completion
 # in Jenkins was successful
 run-name: HAHAHA
 on:
-  pull_request:
-    branches: ['main']
   workflow_dispatch:
 
 jobs:
