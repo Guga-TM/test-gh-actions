@@ -15,3 +15,4 @@ jobs:
         run: |
           #!/bin/bash
           echo "Unit tests passed"
+          exit 1
