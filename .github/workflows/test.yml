@@ -4,6 +4,9 @@ name: jenkins-check-unit-tests-completion-lol
 # in Jenkins was successful
 on:
   pull_request:
+    types:
+      - opened
+      - reopened
 
 jobs:
   check:
