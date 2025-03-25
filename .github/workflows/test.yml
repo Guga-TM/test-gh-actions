@@ -4,10 +4,11 @@ name: jenkins-check-unit-tests-completion
 # in Jenkins was successful
 
 on:
-  pull_request:
-    types:
-      - opened
-      - reopened
+  # pull_request:
+  #   types:
+  #     - opened
+  #     - reopened
+  workflow_dispatch:
 
 jobs:
   check:
