@@ -14,17 +14,16 @@ jobs:
           echo "Merge Commit SHA:"
           echo ${{github.sha}}
           echo "MERGE_COMMIT_SHA=${{github.sha}}" >> "$GITHUB_ENV"
-          echo "$MERGE_COMMIT_SHA"
+          echo "$GITHUB_ENV"
       - name: Set PR status to pending
         uses: actions/github-script@v6
         with:
           script: |
-            console.log(${MERGE_COMMIT_SHA})
-            console.log($MERGE_COMMIT_SHA)
+            console.log(${{github.sha}})
             github.rest.repos.createCommitStatus({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              sha: ${MERGE_COMMIT_SHA},
+              sha: ${{github.sha}},
               state: "pending",
               context: "Jenkins Unit Tests",
               description: "Tests are running in Jenkins"
