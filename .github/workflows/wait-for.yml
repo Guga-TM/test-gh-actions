@@ -22,7 +22,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            console.log(context.payload.pull_request.number)
+            console.log(context.payload.pull_request)
 
       - name: Trigger Jenkins Job
         run: |
