@@ -6,6 +6,7 @@ on:
 jobs:
   trigger-jenkins:
     name: Trigger Jenkins Job
+    permissions: write-all
     runs-on: ubuntu-22.04
     steps:
       - name: Set PR status to pending
