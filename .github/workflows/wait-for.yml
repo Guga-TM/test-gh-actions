@@ -12,4 +12,4 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           ignore: Get Status Sample Workflow
-          match_pattern: lol check
+          match_pattern: Check jenkins job completion
