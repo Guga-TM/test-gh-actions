@@ -14,6 +14,7 @@ jobs:
           echo "Merge Commit SHA:"
           echo ${{github.sha}}
           echo "MERGE_COMMIT_SHA=${{github.sha}}" >> "$GITHUB_ENV"
+          echo "$MERGE_COMMIT_SHA"
       - name: Set PR status to pending
         uses: actions/github-script@v6
         with:
