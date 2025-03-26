@@ -19,10 +19,12 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
+            console.log(${MERGE_COMMIT_SHA})
+            console.log($MERGE_COMMIT_SHA)
             github.rest.repos.createCommitStatus({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              sha: $MERGE_COMMIT_SHA,
+              sha: ${MERGE_COMMIT_SHA},
               state: "pending",
               context: "Jenkins Unit Tests",
               description: "Tests are running in Jenkins"
