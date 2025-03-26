@@ -1,5 +1,14 @@
 name: Trigger Jenkins Job on PR
 
+# github.rest.repos.createCommitStatus({
+            #   owner: context.repo.owner,
+            #   repo: context.repo.repo,
+            #   sha: context.payload.pull_request.merge_commit_sha,
+            #   state: "pending",
+            #   context: "Jenkins Unit Tests",
+            #   description: "Tests are running in Jenkins"
+            # })
+
 on:
   pull_request:
 
@@ -13,14 +22,6 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            # github.rest.repos.createCommitStatus({
-            #   owner: context.repo.owner,
-            #   repo: context.repo.repo,
-            #   sha: context.payload.pull_request.merge_commit_sha,
-            #   state: "pending",
-            #   context: "Jenkins Unit Tests",
-            #   description: "Tests are running in Jenkins"
-            # })
             console.log(context.payload.pull_request.number)
 
       - name: Trigger Jenkins Job
