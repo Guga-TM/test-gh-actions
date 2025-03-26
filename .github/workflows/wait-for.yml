@@ -1,14 +1,5 @@
 name: Trigger Jenkins Job on PR
 
-# github.rest.repos.createCommitStatus({
-            #   owner: context.repo.owner,
-            #   repo: context.repo.repo,
-            #   sha: context.payload.pull_request.merge_commit_sha,
-            #   state: "pending",
-            #   context: "Jenkins Unit Tests",
-            #   description: "Tests are running in Jenkins"
-            # })
-
 on:
   pull_request:
 
@@ -18,13 +9,21 @@ jobs:
     permissions: write-all
     runs-on: ubuntu-22.04
     steps:
+      - name: Get SHA of merge_commit
+        run: |
+          echo "Merge Commit SHA:"
+          echo ${{github.sha}}
+          echo "MERGE_COMMIT_SHA=${{github.sha}}" >> "$GITHUB_ENV"
       - name: Set PR status to pending
         uses: actions/github-script@v6
         with:
           script: |
-            console.log(context.payload.pull_request)
+            github.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: $MERGE_COMMIT_SHA,
+              state: "pending",
+              context: "Jenkins Unit Tests",
+              description: "Tests are running in Jenkins"
+            })
 
-      - name: Trigger Jenkins Job
-        run: |
-          echo hello
-          echo ${{github.sha}}
