@@ -27,3 +27,4 @@ jobs:
       - name: Trigger Jenkins Job
         run: |
           echo hello
+          echo ${{github.sha}}
