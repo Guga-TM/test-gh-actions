@@ -12,7 +12,7 @@ jobs:
       - name: Set PR status to pending
         uses: actions/github-script@v6
         with:
-          token: ${{ SECRETS.GITHUB_TOKEN }}
+          github-token: ${{ SECRETS.GITHUB_TOKEN }}
           script: |
             github.rest.repos.createCommitStatus({
               owner: context.repo.owner,
