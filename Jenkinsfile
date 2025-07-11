@@ -3,10 +3,10 @@ pipeline {
        label "master-agent"
     }
     stages {
-      stage {
+      stage('cat file') {
         steps {
           sh '''#!/bin/bash
-echo hello
+cat 1.txt
 '''
         }
       }
