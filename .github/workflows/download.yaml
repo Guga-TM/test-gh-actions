@@ -1,0 +1,26 @@
+on:
+  push:
+    branches:
+    - testxxx
+
+jobs:
+  terraform-plan:
+    name: 'test download artifacts'
+    runs-on: ubuntu-latest
+
+    steps:
+    # Download plan from artifacts  
+    - name: Download PR Artifact
+      uses: dawidd6/action-download-artifact@v6
+      with:
+        workflow: upload.yaml # Must match the filename of Workflow 1
+        workflow_conclusion: success
+        # Search across PR workflows to find the artifact
+        event: pull_request
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: listing
+      run: |
+        ls -lh
+
