@@ -4,9 +4,38 @@ on:
     - test
 
 jobs:
-  terraform-plan:
-    name: 'test download artifacts'
+  terraform-plan-download:
+    name: 'Check Terraform Plan Exit Code'
     runs-on: ubuntu-latest
+    outputs:
+      tfplanExitCode: ${{ steps.changes-detection.outputs.exitcode }}
+    steps:
+    - name: Download PR Artifact
+      uses: dawidd6/action-download-artifact@v6
+      with:
+        workflow: upload.yaml # Must match the filename of Workflow 1
+        workflow_conclusion: success
+        name: exitcode
+        # Search across PR workflows to find the artifact
+        event: pull_request
+    - name: Changes Detection Message
+      id: changes-detection
+      run: |
+        cat exitcode
+        EXIT_CODE=$(cat exitcode)
+        echo "exitcode=$EXIT_CODE" >> $GITHUB_OUTPUT
+        if [[ "$EXIT_CODE" == "2" ]]; then
+          echo "Terraform changes were detected by Terraform Plan job"
+          echo "Running Terraform Apply pipeline to apply these changes"
+        else
+          echo "No terraform changes - skipping the pipeline"
+        fi
+
+  terraform-apply:
+    name: 'Terraform Apply'
+    runs-on: ubuntu-latest
+    if: needs.terraform-plan-download.outputs.tfplanExitCode == 2
+    needs: [terraform-plan-download]
 
     steps:
     # Checkout the repository to the GitHub Actions runner
@@ -20,20 +49,10 @@ jobs:
         workflow_conclusion: success
         # Search across PR workflows to find the artifact
         event: pull_request
+        name: tfplan
     - name: listing
       run: |
         ls -lh
         echo ima here
-    - name: check
-      run: |
-        EXIT_CODE=$(cat tfplan/exitcode)
-        echo $EXIT_CODE
-        if [[ "$EXIT_CODE" == "0" ]]; then
-          echo "ok"
-          exit 0
-        fi
-    - name: listing2
-      run: |
-        ls -lh
-        echo 'ima still here'
+        cat tfplan
 
