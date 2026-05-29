@@ -1,0 +1,28 @@
+name: 'Terraform Plan'
+
+on:
+  pull_request:
+    branches:
+    - test
+
+jobs:
+  terraform-plan:
+    name: 'test upload'
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Terraform Plan
+      id: tf-plan
+      run: |
+        export exitcode=0
+        mkdir -p outputs
+        touch outputs/exitcode
+        echo "$exitcode" > outputs/exitcode
+        echo "Hello world" | tee outputs/file.txt
+        
+    # Save plan and exitcode to artifacts  
+    - name: Publish Terraform Plan and metadata
+      uses: actions/upload-artifact@v4
+      with:
+        name: tfplan
+        path: outputs/
