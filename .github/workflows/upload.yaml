@@ -21,8 +21,13 @@ jobs:
         echo "Hello world" | tee outputs/file.txt
         
     # Save plan and exitcode to artifacts  
-    - name: Publish Terraform Plan and metadata
+    - name: Publish Terraform Plan
       uses: actions/upload-artifact@v4
       with:
         name: tfplan
-        path: outputs/
+        path: outputs/file.txt
+    - name: Publish Terraform metadata
+      uses: actions/upload-artifact@v4
+      with:
+        name: exitcode
+        path: outputs/exitcode
