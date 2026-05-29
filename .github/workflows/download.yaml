@@ -9,7 +9,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Download plan from artifacts  
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v4
+    # Downloading after checkout 
     - name: Download PR Artifact
       uses: dawidd6/action-download-artifact@v6
       with:
@@ -17,10 +20,20 @@ jobs:
         workflow_conclusion: success
         # Search across PR workflows to find the artifact
         event: pull_request
-    # Checkout the repository to the GitHub Actions runner
-    - name: Checkout
-      uses: actions/checkout@v4
     - name: listing
       run: |
         ls -lh
+        echo ima here
+    - name: check
+      run: |
+        EXIT_CODE=$(cat tfplan/exitcode)
+        echo $EXIT_CODE
+        if [[ "$EXIT_CODE" == "0" ]]; then
+          echo "ok"
+          exit 0
+        fi
+    - name: listing2
+      run: |
+        ls -lh
+        echo 'ima still here'
 
